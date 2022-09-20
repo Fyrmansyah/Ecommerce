@@ -14,15 +14,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
 
     <!-- Styles -->
-    <!-- <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link href=" {{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href=" {{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <!-- =============================================================================== -->
      <!-- Favicon -->
      <link href=" {{ asset('halamanUser/img/favicon.ico') }}" rel="icon">
@@ -46,14 +46,13 @@
 </head>
 <body>
     <div id="app">
-        <!-- <na  -->
         <!-- topbar -->
         <div class="container-fluid">
-            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-                <div class="col-lg-4">
-                    <a href="" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+            <div class="row align-items-center bg-light py-3 px-xl-5 ">
+                <div class="col-10">
+                    <a href="/" class="text-decoration-none">
+                        <span class="h1 text-uppercase text-primary bg-dark px-2">koperasi</span>
+                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">ku</span>
                     </a>
                 </div>
                 <!-- <div class="col-lg-4 col-6 text-left">
@@ -68,57 +67,46 @@
                         </div>
                     </form>
                 </div> -->
-                <div class="col-lg-4 col-6 text-right">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <div class="col-2 d-flex align-items-center">
+                
+                    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        <!-- <ul class="navbar-nav me-auto">
+                    </button> -->
+                    <!-- Authentication Links -->
+                    @if(Route::has('login') && Route::has('register'))
+                    <p>-</p>
+                    @endif
+                    @guest
+                        <!-- @if(Route::has('login')) -->
+                                <a class="btn btn-warning rounded-pill mr-2" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <!-- @endif -->
 
-                        </ul> -->
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                        <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                            <a href="" class="dropdown-item">Men's Dresses</a>
-                            <a href="" class="dropdown-item">Women's Dresses</a>
-                            <a href="" class="dropdown-item">Baby's Dresses</a>
-                        </div>
-                        <!-- Right Side Of Navbar -->
-                        <!-- <ul class="navbar-nav ms-auto"> -->
-                            <!-- Authentication Links -->
-                            <!-- @guest
-                                @if (Route::has('login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                @endif
-
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }}
+                        <!-- @if(Route::has('register')) -->
+                                <a class="btn btn-outline-warning rounded-pill" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <!-- @endif -->
+                    @endguest
+                    @auth
+                        <div class="dropdown">
+                            <button class="btn btn-warning dropdown-toggle rounded-pill" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" 
+                                        onclick="event.preventDefault(); 
+                                                document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                     </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </li>
-                            @endguest
-                        </ul> -->
-                    </div>
+                                <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                            </ul>
+                        </div>
+                    @endauth
+                
                 </div>
             </div>
         </div>
@@ -132,11 +120,11 @@
      <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 
      <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     @livewireScripts
 
 
