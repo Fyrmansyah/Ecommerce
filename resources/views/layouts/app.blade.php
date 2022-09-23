@@ -49,13 +49,14 @@
         <!-- topbar -->
         <div class="container-fluid">
             <div class="row align-items-center bg-light py-3 px-xl-5 ">
-                <div class="col-10">
+                <div class="col-4">
                     <a href="/" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">koperasi</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">ku</span>
                     </a>
                 </div>
-                <!-- <div class="col-lg-4 col-6 text-left">
+                @if(Route::has('register'))
+                <div class="col-4 text-left">
                     <form action="">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for products">
@@ -66,8 +67,9 @@
                             </div>
                         </div>
                     </form>
-                </div> -->
-                <div class="col-2 d-flex align-items-center">
+                </div>
+                @endif
+                <div class="col-4 d-flex align-items-center justify-content-end">
                 
                     <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
