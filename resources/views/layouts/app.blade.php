@@ -46,6 +46,7 @@
 </head>
 <body>
     <div id="app">
+        <!-- punyakuuuu reno -->
         <!-- topbar -->
         <div class="container-fluid">
             <div class="row align-items-center bg-light py-3 px-xl-5 ">
