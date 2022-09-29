@@ -19,7 +19,7 @@ return new class extends Migration
             $table->mediumText('deskripsi');
             $table->string('foto')->nullabel();
 
-            $table->tinyInteger('status')->default('0')->comment('t=tampilkan,h=hidden');
+            $table->tinyInteger('status')->default('0')->comment('0=tampilkan,1=hidden');
             $table->timestamps();
         });
     }
