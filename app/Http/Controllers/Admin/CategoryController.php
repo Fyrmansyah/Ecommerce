@@ -10,6 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        // return "k";
         return view('admin.category.index');
     }
     

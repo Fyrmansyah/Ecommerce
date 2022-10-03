@@ -12,6 +12,7 @@
                                         <th>ID</th>
                                         <th>Nama</th>
                                         <th>Status</th>
+                                        <th>stok</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -20,8 +21,8 @@
                                         <tr>
                                             <td>{{$category->id}}</td>
                                             <td>{{$category->nama}}</td>
-                                            <td>{{$category->Jumlah Stok}}</td>
                                             <td>{{$category->status == '1' ? 'Hidden':'Visible'}}</td>
+                                            <td>fff</td>
                                             <td>
                                                 <a href="{{ url('admin/category/'.$category->id.'/edit') }}"class="btn btn-success">Edit</a>
                                                 <a href=""class="btn btn-danger">Delete</a>
