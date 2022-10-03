@@ -1,4 +1,5 @@
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar ">
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="index.html">
@@ -8,8 +9,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="mdi mdi-circle-outline menu-icon"></i>
-              <span class="menu-title">UI Elements</span>
+            <i class="fa fa-database" aria-hidden="true"></i>     
+                    <span class="menu-title">UI Elements</span>
+              <i class="bi bi-bag-check"></i>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
