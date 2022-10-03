@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,15 +21,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [   HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class,'index'])->name('home');
 
 Route::prefix('/admin')->middleware(['auth','isAdmin'])->group(function(){
 
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
-    //Category 
-    Route::get('category',[CategoryController::class,'index']);
-    Route::get('category/create',[CategoryController::class,'create']);
-    Route::post('category' ,[CategoryController::class,'toko']);
+     //category routes
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('category', 'index');
+        Route::get('category/create', 'create');
+        Route::post('category', 'toko');
+        Route::get('/category/{category}/edit', 'edit');
+    });
+
+
+
 
 });

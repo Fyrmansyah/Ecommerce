@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoryFormRequest;
 
 class CategoryController extends Controller
 {
@@ -64,5 +63,8 @@ class CategoryController extends Controller
 
         return redirect('admin/category')->with('message','Category berhasil di tambahkan');
     }
-
+    public function edit(Category $category )
+    {
+        return $category;
+    }
 }

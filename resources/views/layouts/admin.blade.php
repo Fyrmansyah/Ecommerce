@@ -23,13 +23,17 @@
   <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
 
  @livewireStyles
-
+ <style type="text/css">
+	#gradient5 {
+        background: linear-gradient(to right, #3366cc 0%, #66ffff 103%);
+	}
+  </style>
 </head>
 <body>
-    <div class="container-scroller">
+    <div class="container-scroller" id="gradient5">
         @include('layouts.inc.admin.navbar')
 
-         <div class="container-fluid page-body-wrapper">
+         <div class="container-fluid page-body-wrapper" id="gradient5"> 
             @include('layouts.inc.admin.sidebar')
 
             <div class="main-panel">
