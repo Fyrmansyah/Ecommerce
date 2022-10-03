@@ -63,8 +63,8 @@ class CategoryController extends Controller
 
         return redirect('admin/category')->with('message','Category berhasil di tambahkan');
     }
-    public function edit(Category $category )
+    public function edit($category)
     {
-        return $category;
+        return $category  ;
     }
 }

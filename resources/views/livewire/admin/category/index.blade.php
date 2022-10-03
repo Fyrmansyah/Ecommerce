@@ -19,7 +19,8 @@
                                         @foreach($categories as $category)
                                         <tr>
                                             <td>{{$category->id}}</td>
-                                            <td>{{$category->name}}</td>
+                                            <td>{{$category->nama}}</td>
+                                            <td>{{$category->Jumlah Stok}}</td>
                                             <td>{{$category->status == '1' ? 'Hidden':'Visible'}}</td>
                                             <td>
                                                 <a href="{{ url('admin/category/'.$category->id.'/edit') }}"class="btn btn-success">Edit</a>
