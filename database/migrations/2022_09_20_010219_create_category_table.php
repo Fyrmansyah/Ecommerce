@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('harga');
+            $table->integer('stok');
             $table->mediumText('deskripsi');
             $table->string('foto')->nullabel();
 
