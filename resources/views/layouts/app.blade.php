@@ -75,9 +75,11 @@
                 
                     </button> 
                     <!-- Authentication Links -->
+
                     @if(Route::has('login') && Route::has('register'))
                     <p></p>
                     @endif
+                    
                     @guest
                         <!-- @if(Route::has('login')) -->
                                 <a class="btn btn-warning rounded-pill mr-2" href="{{ route('login') }}">{{ __('Login') }}</a>
