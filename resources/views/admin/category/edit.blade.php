@@ -15,7 +15,7 @@
                 </div>
             @endif
                 <div class="card-header">
-                    <h3>Tambah Barang 
+                    <h3>edit Barang 
                     <a href="{{url ('admin/category') }}" class="btn btn-dark float-end">Kembali </a>           
                     </h3>       
                         <div class="row">
@@ -24,7 +24,7 @@
                                 @csrf
                                 <div class=" mb-3">
                                     <label>Nama</label>
-                                    <input type="text" name="nama" class="form-control" value="{{old('nama')}}" >
+                                    <input type="text" name="nama" class="form-control" />
                                 </div>
                                 <div class=" mb-3">
                                     <label>Stok</label>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class=" mb-3">
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary fload-end"> Save </button>
+                                            <button type="submit" class="btn btn-primary fload-end"> Update </button>
                                         </div>
                                 </div>
                             </form>
