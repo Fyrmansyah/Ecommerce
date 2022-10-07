@@ -30,10 +30,11 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
      //category routes
     Route::controller(CategoryController::class)->group(function () {
-        Route::get('category', 'index');
-        Route::get('category/create', 'create');
-        Route::post('category', 'toko');
-        Route::get('/category/{category}/edit', 'edit');
+        Route::get('category', 'index'); //requwat view table
+        Route::get('category/create', 'create'); //request view
+        Route::post('category', 'toko'); //request data
+        Route::get('category/{category}/edit', 'edit'); //request view
+        Route::post('category/{category}/update', 'update'); //request data
     });
 
 

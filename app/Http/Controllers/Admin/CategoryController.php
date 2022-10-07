@@ -20,9 +20,7 @@ class CategoryController extends Controller
     }
 
 
-    
     public function toko(Request $request)
-   
     {
         // $validatedData = $request->validated();
         
@@ -51,17 +49,8 @@ class CategoryController extends Controller
         $category->deskripsi= $request->deskripsi;
         $category->harga= $request->harga;
         $category->stok= $request->stok;
-
-        if($request->hasFile('foto')){
-            // $file = $request->file('foto');
-            // $ext = $file->getClientOriginalExtension();
-            // $filename = time().'.'.$ext;
-            $category->foto = $request->file("foto")->store('post-images', 'public');
-            // $file->move('uploads/category',$filename);
-            // $category->foto = $filename;
-            $category->status = $request->status== true ?'1':'0';
-        }
-        
+        $category->foto = $request->file("foto")->store('post-images', 'public');
+        $category->status = $request->status== true ?'1':'0';
         // return $category;
         $category->save();
 
@@ -69,10 +58,28 @@ class CategoryController extends Controller
     }
     public function edit($category)
     {
+        // return
+        $category = category::find($category);
         return view('admin.category.edit',compact('category'));
     }
-    // public function update($request,$category)
-    // {
-    //     $category = Category::findOrFail($category);
-    // }
+
+    public function update(Request $request, $category)
+    {
+        // return $category;
+        
+        $update = [
+            'nama'=> $request->nama,
+            'deskripsi'=> $request->deskripsi,
+            'stok'=> $request->stok,
+            'harga'=> $request->harga,
+            'status'=> $request->status== true ?'1':'0'
+        ];
+
+        if($request->hasFile('foto')){
+            $update["foto"] = $request->file("foto")->store('post-images', 'public');
+        }
+
+        category::where('id', $category)->update($update);
+        return redirect('admin/category')->with('message','Category berhasil di perbarui');
+    }
 }

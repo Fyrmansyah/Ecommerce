@@ -20,36 +20,37 @@
                     </h3>       
                         <div class="row">
                         <div class="card-body">
-                            <form action="{{url ('admin/category') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{url('admin/category/'.$category->id.'/update') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class=" mb-3">
                                     <label>Nama</label>
-                                    <input type="text" name="nama" class="form-control" />
+                                    <input type="text" name="nama" class="form-control" value="{{$category->nama}}"/>
                                 </div>
                                 <div class=" mb-3">
                                     <label>Stok</label>
-                                    <input type="text" name="stok" class="form-control" value="{{old('stok')}}" >
+                                    <input type="text" name="stok" class="form-control" value="{{$category->stok}}" >
                                 </div>
                                 <div class=" mb-3">
                                     <label>Harga</label>
-                                    <input type="text" name="harga" class="form-control" value="{{old('harga')}}" >
+                                    <input type="text" name="harga" class="form-control" value="{{$category->harga}}" >
                                 </div>
                                 <div class=" mb-3">
                                     <label>Deskripsi</label>
-                                    <textarea  name="deskripsi" class="form-control" rows="3" >{{old('deskripsi')}}</textarea>
+                                    <textarea  name="deskripsi" class="form-control" rows="3" >{{$category->deskripsi}}</textarea>
                                     </div>
                                 <div class=" mb-3">
                                     <label>Foto</label>
-                                    <input type="file" name="foto" class="form-control"/ >
+                                    <input type="file" name="foto" class="form-control mb-2"/ >
+                                    <img src="/storage/{{$category->foto}}" alt="" width="200px" height="200px">
                                     </div>
                                 <div class=" mb-3">
                                     <label>Status</label>
-                                    <input type="checkbox" name="status" >
+                                    <input type="checkbox" name="status" {{ ($category->status) ? "checked" : "" }} }>
                                 </div>
                                 <div class=" mb-3">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary fload-end"> Update </button>
-                                        </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary fload-end"> Update </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
