@@ -20,9 +20,7 @@ class CategoryController extends Controller
     }
 
 
-    
     public function toko(Request $request)
-   
     {
         // $validatedData = $request->validated();
         
@@ -37,9 +35,11 @@ class CategoryController extends Controller
         ];
         // validasi form
         $this->validate($request,[
-            'nama'=>'required |min:7|max:30',
+            'nama'=>'required|min:7|max:30',
             'deskripsi'=>'required', 
-            'foto'=>'mimes:jpg,jpeg',
+            'foto'=>'required|mimes:jpg,jpeg',
+            'stok'=>'required',
+            'harga'=>'required',
 
         ],$message);
 
@@ -47,25 +47,39 @@ class CategoryController extends Controller
         $category = new Category;
         $category->nama = $request->nama;
         $category->deskripsi= $request->deskripsi;
-
-        if($request->hasFile('foto')){
-            $file = $request->file('foto');
-            $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
-    
-            $file->move('uploads/category',$filename);
-    
-            $category->foto = $filename;
-            $category->status = $request->status== true ?'1':'0';
-        }
-        
-
+        $category->harga= $request->harga;
+        $category->stok= $request->stok;
+        $category->foto = $request->file("foto")->store('post-images', 'public');
+        $category->status = $request->status== true ?'1':'0';
+        // return $category;
         $category->save();
 
         return redirect('admin/category')->with('message','Category berhasil di tambahkan');
     }
     public function edit($category)
     {
-        return $category  ;
+        // return
+        $category = category::find($category);
+        return view('admin.category.edit',compact('category'));
+    }
+
+    public function update(Request $request, $category)
+    {
+        // return $category;
+        
+        $update = [
+            'nama'=> $request->nama,
+            'deskripsi'=> $request->deskripsi,
+            'stok'=> $request->stok,
+            'harga'=> $request->harga,
+            'status'=> $request->status== true ?'1':'0'
+        ];
+
+        if($request->hasFile('foto')){
+            $update["foto"] = $request->file("foto")->store('post-images', 'public');
+        }
+
+        category::where('id', $category)->update($update);
+        return redirect('admin/category')->with('message','Category berhasil di perbarui');
     }
 }
