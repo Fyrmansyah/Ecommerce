@@ -31,13 +31,8 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 Route::prefix('/admin')->middleware(['auth','isAdmin'])->group(function(){
-    // Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
-<<<<<<< HEAD
-    Route::get('/dashboard', [DashboardController::class, 'index']);
-=======
 
-Route::get('dashboard', [DashboardController::class, 'index']);
->>>>>>> dfd032d2cb9e9d57e9133aadf9224ad4194c8301
+    Route::get('dashboard', [DashboardController::class, 'index']);
 
      //category routes
     Route::controller(CategoryController::class)->group(function () {
