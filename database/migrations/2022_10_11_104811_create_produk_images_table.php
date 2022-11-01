@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('produk_images', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->mediumText('deskripsi');
-            $table->string('foto')->nullabel();
-            $table->tinyInteger('status')->default('0')->comment('0=tampilkan,1=hidden');
+            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('produks_id');
+            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
+            $table->foreign('produks_id')->references('id')->on('produks')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('produk_images');
     }
 };

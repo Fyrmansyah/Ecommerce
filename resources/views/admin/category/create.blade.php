@@ -26,14 +26,7 @@
                                     <label>Nama</label>
                                     <input type="text" name="nama" class="form-control" value="{{old('nama')}}" >
                                 </div>
-                                <div class=" mb-3">
-                                    <label>Stok</label>
-                                    <input type="text" name="stok" class="form-control" value="{{old('stok')}}" >
-                                </div>
-                                <div class=" mb-3">
-                                    <label>Harga</label>
-                                    <input type="text" name="harga" class="form-control" value="{{old('harga')}}" >
-                                </div>
+                             
                                 <div class=" mb-3">
                                     <label>Deskripsi</label>
                                     <textarea  name="deskripsi" class="form-control" rows="3" >{{old('deskripsi')}}</textarea>
