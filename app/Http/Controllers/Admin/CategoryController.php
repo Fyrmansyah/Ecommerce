@@ -23,32 +23,29 @@ class CategoryController extends Controller
     public function toko(Request $request)
     {
         // $validatedData = $request->validated();
-        
+        // return $request;
         $message=[
             'required' => ':attribute harus di isi!',
             'min' => ':attribute minimal :min karakter!',
             'max' => ':attribute maksimal :max karakter!',
             'numeric' => ':attribute harus di isi dengan angka',
-            'mimes' => 'file :attribute harus di bertipe mimes: jpg,png,jpeg',
+            'mimes' => ':attribute harus di bertipe mimes: jpg,png,jpeg',
             
 
         ];
         // validasi form
         $this->validate($request,[
-            'nama'=>'required|min:7|max:30',
+            'nama'=>'required|min:3|max:30',
             'deskripsi'=>'required', 
             'foto'=>'required|mimes:jpg,jpeg',
-            'stok'=>'required',
-            'harga'=>'required',
+            
 
         ],$message);
 
         // $validate = [];
         $category = new Category;
         $category->nama = $request->nama;
-        $category->deskripsi= $request->deskripsi;
-        $category->harga= $request->harga;
-        $category->stok= $request->stok;
+        $category->deskripsi= $request->deskripsi;    
         $category->foto = $request->file("foto")->store('post-images', 'public');
         $category->status = $request->status== true ?'1':'0';
         // return $category;
@@ -70,8 +67,6 @@ class CategoryController extends Controller
         $update = [
             'nama'=> $request->nama,
             'deskripsi'=> $request->deskripsi,
-            'stok'=> $request->stok,
-            'harga'=> $request->harga,
             'status'=> $request->status== true ?'1':'0'
         ];
 
