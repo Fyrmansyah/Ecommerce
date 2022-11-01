@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->mediumText('deskripsi');
-            $table->string('foto')->nullabel();
-            $table->tinyInteger('status')->default('0')->comment('0=tampilkan,1=hidden');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('images');
     }
 };

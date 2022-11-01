@@ -5,16 +5,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Category Delete</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Batal"></button>
       </div>
             <form wire:submit.prevent="destroyCategory">
 
-
+c
                  <div class="modal-body">
                 <h6> Apakah Data Akan Di Hapus?</h6>
                 </div>
                   <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary">Ya. Hapus</button>
             </div>
             </form>
