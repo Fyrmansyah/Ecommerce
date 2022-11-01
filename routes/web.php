@@ -15,18 +15,23 @@ use App\Http\Controllers\Admin\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('user.home');
+// });
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class,'index'])->name('home');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/home', 'index')->name('home');
+    Route::get('/detail/{id}', 'detail');
+    Route::get('/cart', 'cart');
+    Route::get('/getcart', 'getCart');
+    Route::post('/addcart', 'addCart');
+});
 
 Route::prefix('/admin')->middleware(['auth','isAdmin'])->group(function(){
-    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
-
-Route::get('/dashboard', [DashboardController::class, 'index']);
+    // Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
      //category routes
     Route::controller(CategoryController::class)->group(function () {

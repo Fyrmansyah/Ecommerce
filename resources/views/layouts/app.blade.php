@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -40,6 +40,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('halamanUser/css/style.css') }}" rel="stylesheet">
+    
 
  @livewireStyles
 
@@ -114,12 +115,15 @@
             </div>
         </div>
         <!-- end topbar -->
+         <!-- Navbar Start -->
+         @include('layouts.topbar')
+        <!-- Navbar End -->
         <main class="py-4">
             @yield('content')
         </main>
     </div>
      <!-- Scripts -->
-     <script src="{{ asset('assets/js/query-3.6.1.min.js')}}"></script>
+     <script src="{{ asset('assets/js/jquery-3.6.1.min.js')}}"></script>
      <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 
      <!-- Bootstrap core JavaScript-->
@@ -127,7 +131,7 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script> --}}
     @livewireScripts
 
 
@@ -136,8 +140,8 @@
     
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
+    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> --}}
     <script src="{{ asset('halamanUser/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('halamanUser/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 

@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('harga');
-            $table->integer('stok');
-            $table->mediumText('deskripsi');
-            $table->string('foto')->nullabel();
-            $table->tinyInteger('status')->default('0')->comment('0=tampilkan,1=hidden');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('category_id')->constrained('category');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('carts');
     }
 };
