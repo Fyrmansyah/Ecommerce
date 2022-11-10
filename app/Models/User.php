@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function cart(){
         return $this->belongsTo(cart::class);
     }
+
+    public function transaction(){
+        return $this->belongsTo(transaction::class);
+    }
 }

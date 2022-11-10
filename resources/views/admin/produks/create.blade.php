@@ -22,7 +22,6 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="detail-tab" data-bs-toggle="tab" data-bs-target="#detail-tab-pane" type="button" role="tab" aria-controls="detail-tab-pane fade bordered p-3" aria-selected="false">Detail</button>
             </li>
-        
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade border p-3 show active p-3" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -74,12 +73,8 @@
                     </div>
                 </div>
         </div>
-               
                 </div>
-                </div>
-                <div>
-                    <button class="btn btn-primary float-end">Submit</button>
-                </div>
+                    <button class="btn btn-primary float-end mt-3 text-white">Submit</button>
                 </form> 
     </div>
     </div>

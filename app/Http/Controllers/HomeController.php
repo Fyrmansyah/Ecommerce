@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Produk;
 use App\Models\cart;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,23 +28,30 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         // $cart = cart::where("user_id", Auth::user()->id)->count();
         // return $cart;
-        $data = category::get();
-        return view('user.home', compact("data"));
+        $categories = category::get();
+        $produks = produk::get();
+        // return $categories;
+        return view('user.home', compact("categories", 'produks'));
+    }
+
+    public function getCategory()
+    {
+        return response()->json(category::get());
     }
 
     public function detail($id)
-    {;
-        $data = category::find($id);
+    {
+        $data = produk::find($id);
+        // return $data;
         return view('user.detail', compact("data"));
     }
 
     public function cart()
     {
         
-        $data = cart::where("user_id", Auth::user()->id)->with("category")->get();
+        $data = cart::where("user_id", Auth::user()->id)->with("produk")->get();
         // return $data;
         return view('user.cart', compact("data"));
     }
@@ -57,19 +65,19 @@ class HomeController extends Controller
     public function addCart(Request $request)
     {
         // $data = category::find($id);
-        $existCart = cart::where("user_id", $request->userId)->where("category_id" , $request->categoryId)->count();
+        $existCart = cart::where("user_id", $request->userId)->where("produk_id" , $request->categoryId)->count();
         if($existCart >= 1){
-            cart::where("user_id", $request->userId)->where("category_id" , $request->categoryId)
+            cart::where("user_id", $request->userId)->where("produk_id" , $request->categoryId)
             ->update([
                 "user_id" => $request->userId,
-                "category_id" => $request->categoryId ,
+                "produk_id" => $request->categoryId ,
                 "jumlah"=> $request->jumlah
             ]);
         } else {
 
             cart::create([
                 "user_id" => $request->userId,
-                "category_id" => $request->categoryId ,
+                "produk_id" => $request->categoryId ,
                 "jumlah"=> $request->jumlah
             ]);
         }

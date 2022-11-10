@@ -20,8 +20,8 @@ class Category extends Model
 
     ];
 
-    public function cart(){
-        return $this->hasMany(cart::class);
+    public function produk(){
+        return $this->hasMany(produk::class);
     }
 
 }

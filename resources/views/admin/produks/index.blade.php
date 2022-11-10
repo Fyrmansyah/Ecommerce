@@ -36,10 +36,10 @@
                             <td>{{$item->keterangan}}</td>
                             <td>{{$item->status}}</td>
                             <td>
-                            <a href="{{ url('admin/produk/'.$item->id.'/edit') }}"class="btn btn-success">Edit</a>
-                                                <a href="#" wire:click="deleteProduk({{$item->id}})"data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Delete</a>
-                                            </td>
-                        </tr>
+                                <a href="{{ url('admin/produk/'.$item->id.'/edit') }}"class="btn btn-success">Edit</a>
+                                <a href="#" wire:click="deleteProduk({{$item->id}})"data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Delete</a>
+                            </td>
+                         </tr>
                         @endforeach
                     </tbody>
                 </table>

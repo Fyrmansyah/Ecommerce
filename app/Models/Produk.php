@@ -23,9 +23,13 @@ class Produk extends Model
         'action',
     ];
 
-    public function image()
+    public function category()
     {
-        return $this->belongsToMany(Image::class,'produk_image', 'id');
+        return $this->belongsTo(category::class);
+    }
+
+    public function cart(){
+        return $this->hasMany(cart::class);
     }
    
 }

@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\produk;
+use App\Models\transaction;
 
 class UserSeeder extends Seeder
 {
@@ -67,6 +69,13 @@ class UserSeeder extends Seeder
         //     'status'=> 0
         // ]);
 
+
+        // transaction::create([
+        //     'cart_id'=> 1,
+        //     'user_id'=> 2,
+        //     'status'=> 1
+        // ]);  
+        
         // post-images/sF96fFDRdxNBJtt3s41LYK3Mnu2qqM8G7IgArfxN.jpg
     }
 }

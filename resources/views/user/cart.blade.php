@@ -16,25 +16,25 @@
                 <tbody class="align-middle">
                     @foreach ($data as $cart)
                         <tr>
-                            <td><img class="rounded-circle" src="storage/{{$cart->category->foto}}" alt="" style="width: 50px;"></td>
-                            <td class="align-middle">{{$cart->category->nama}}</td>
-                            <td class="align-middle" id="harga">Rp. {{$cart->category->harga}}</td>
+                            <td><img class="rounded-circle" src="/produk-image/{{$cart->produk->image}}" alt="" style="width: 50px;"></td>
+                            <td class="align-middle">{{$cart->produk->nama}}</td>
+                            <td class="align-middle" id="harga">Rp. {{$cart->produk->harga}}</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" onclick="ahayy({{$cart->category->harga}}, {{$cart->category->id}}, 'min')">
+                                        <button class="btn btn-sm btn-primary btn-minus" onclick="ahayy({{$cart->produk->harga}}, {{$cart->produk->id}}, 'min')">
                                         <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input id="jumlah{{$cart->category->id}}" type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{$cart->jumlah}}">
+                                    <input id="jumlah{{$cart->produk->id}}" type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{$cart->jumlah}}">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus" onclick="ahayy({{$cart->category->harga}}, {{$cart->category->id}}, 'plus')">
+                                        <button class="btn btn-sm btn-primary btn-plus" onclick="ahayy({{$cart->produk->harga}}, {{$cart->produk->id}}, 'plus')">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle" id="totalperitem{{$cart->category->id}}">Rp. {{$cart->category->harga * $cart->jumlah}}</td>
+                            <td class="align-middle" id="totalperitem{{$cart->produk->id}}">Rp. {{$cart->produk->harga * $cart->jumlah}}</td>
                             <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
                         </tr>
                     @endforeach
@@ -75,7 +75,6 @@
 </div>
 @endsection
 
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
 <script> 
 
 // $('#jumlah').on('input', function() {

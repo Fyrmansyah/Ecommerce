@@ -35,13 +35,10 @@
                                <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>foto</th>
-                                        <th>Nama</th>
-                                        <th>Status</th>
-                                        <th>stok</th>
-                                        <th>harga</th>
-                                        <th>Action</th>
+                                        <th width="5%">ID</th>
+                                        <th width="7%">foto</th>
+                                        <th>Category</th>
+                                        <th width="20%">Action</th>
                                     </tr>
                                 </thead>
                                     <tbody>
@@ -50,9 +47,6 @@
                                             <td>{{$category->id}}</td>
                                             <td><img src="/storage/{{$category->foto}}" alt="" width="40px" height="40px"></td>
                                             <td>{{$category->nama}}</td>
-                                            <td>{{$category->status == '1' ? 'Hidden':'Visible'}}</td>
-                                            <td>{{$category->stok}}</td>
-                                            <td>{{$category->harga}}</td>
                                             <td>
                                                 <a href="{{ url('admin/category/'.$category->id.'/edit') }}"class="btn btn-success">Edit</a>
                                                 <a href="#" wire:click="deleteCategory({{$category->id}})"data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Delete</a>
