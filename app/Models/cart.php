@@ -12,11 +12,15 @@ class cart extends Model
         'id'
     ];
 
-    public function category(){
-        return $this->belongsTo(Category::class);
+    public function produk(){
+        return $this->belongsTo(produk::class);
     }
 
     public function user(){
         return $this->hasOne(User::class);
+    }
+
+    public function transaction(){
+        return $this->hasMany(transaction::class);
     }
 }

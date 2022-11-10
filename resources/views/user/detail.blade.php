@@ -6,13 +6,13 @@
     <div class="row px-xl-5">
         <div class="col-lg-5 mb-30">
             <div class="carousel-item active">
-                <img class="w-100" style="height: 403px;" src="{{ asset('/storage/'.$data->foto) }}" alt="Image">
+                <img class="w-100" style="height: 403px;" src="{{ asset('/produk-image/'.$data->image) }}" alt="Image">
             </div>
         </div>
 
         <div class="col-lg-7 h-auto mb-30">
             <div class="h-100 bg-light p-30">
-                <h3>{{$data->nama}}</h3>
+                <h3><i>{{$data->nama}}</i> </h3>
                 <div class="d-flex mb-3">
                     {{-- <div class="text-primary mr-2">
                         <small class="fas fa-star"></small>
@@ -23,57 +23,22 @@
                     </div>
                     <small class="pt-1">(99 Reviews)</small> --}}
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">Rp. {{$data->harga}}</h3>
-                <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
-                    clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
-                    Nonumy</p>
+                <h4 class="font-weight-semi-bold mb-4 danger">Rp. {{$data->harga}}</h4>
+                <p class="mb-4">{{$data->deskripsi}}</p>
                 <div class="d-flex mb-3">
-                    <strong class="text-dark mr-3">Sizes:</strong>
+                    <strong class="text-dark mr-3">grade :</strong>
                     <form>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="size-1" name="size">
-                            <label class="custom-control-label" for="size-1">XS</label>
+                            <label class="custom-control-label" for="size-1">10</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="size-2" name="size">
-                            <label class="custom-control-label" for="size-2">S</label>
+                            <label class="custom-control-label" for="size-2">11</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="size-3" name="size">
-                            <label class="custom-control-label" for="size-3">M</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-4" name="size">
-                            <label class="custom-control-label" for="size-4">L</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-5" name="size">
-                            <label class="custom-control-label" for="size-5">XL</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="d-flex mb-4">
-                    <strong class="text-dark mr-3">Colors:</strong>
-                    <form>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-1" name="color">
-                            <label class="custom-control-label" for="color-1">Black</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-2" name="color">
-                            <label class="custom-control-label" for="color-2">White</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-3" name="color">
-                            <label class="custom-control-label" for="color-3">Red</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-4" name="color">
-                            <label class="custom-control-label" for="color-4">Blue</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-5" name="color">
-                            <label class="custom-control-label" for="color-5">Green</label>
+                            <label class="custom-control-label" for="size-3">12</label>
                         </div>
                     </form>
                 </div>
@@ -227,7 +192,6 @@
     </div>
 </div>
 <!-- Shop Detail End -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     function addCart(categoryId, userId){
         let jumlah = $('#jumlah').val()
@@ -239,7 +203,7 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         data:{ jumlah, categoryId, userId},
-        success:function(res){
+        success: function(res){
             if(res.success){
                 alert(res.message)
                 $('#jumlah').val(1)
