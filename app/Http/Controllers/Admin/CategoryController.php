@@ -3,11 +3,61 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use App\Models\produk;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    // ================================================================================
+    // ================================== FOR USER ====================================
+    // ================================================================================
+
+    public function indexUser()
+    {
+        $categories = Category::get();
+        return view('user.category', compact('categories'));
+    }
+
+    public function getAllProducts()
+    {
+        return response()->json(produk::get()); 
+    }
+    
+    public function filter($id, Request $request)
+    {
+        // return $request;
+
+        foreach ($request->valueFilter as $item) {
+            $data[] = $item;
+        }
+
+        // return $data;
+        $produks = produk::whereIn('category_id', $data)->get();
+
+        return response()->json([
+            "data" => $produks,
+            "success" => true,
+            "message" => "barang berhasil ditambahkan ke keranjang"
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ================================================================================
+    // ================================== FOR ADMIN ===================================
+    // ================================================================================
+
     public function index()
     {
         // return "k";

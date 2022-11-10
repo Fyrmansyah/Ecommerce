@@ -8,11 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <!-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
-
+    
     <!-- Styles -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -25,14 +21,14 @@
     <link href=" {{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <!-- =============================================================================== -->
      <!-- Favicon -->
-     <link href=" {{ asset('halamanUser/img/favicon.ico') }}" rel="icon">
+     <link href=" {{ asset('admin/images/icon.ico') }}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> --}}
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('halamanUser/lib/animate/animate.min.css') }}" rel="stylesheet">
@@ -44,21 +40,24 @@
 
  @livewireStyles
 
+     <!-- Scripts -->
+     <script src="{{ asset('assets/js/jquery-3.6.1.min.js')}}"></script>
+     <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 </head>
 <body>
     <div id="app">
         <!-- punyakuuuu reno -->
         <!-- topbar -->
         <div class="container-fluid">
-            <div class="row align-items-center bg-light py-3 px-xl-5 ">
+            <div class="d-flex align-items-center bg-light py-3 px-xl-5 ">
                 <div class="col-4">
                     <a href="/" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">koperasi</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">ku</span>
                     </a>
                 </div>
-                @if(Route::has('register'))
-                <div class="col-4 text-left">
+                @auth
+                <div class="text-left w-25 mx-auto">
                     <form action="">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for products">
@@ -70,8 +69,8 @@
                         </div>
                     </form>
                 </div>
-                @endif
-                <div class="col-4 d-flex align-items-center justify-content-end">
+                @endauth
+                <div class="d-flex align-items-center ml-auto">
                 
                 
                     </button> 
@@ -116,19 +115,17 @@
         </div>
         <!-- end topbar -->
          <!-- Navbar Start -->
+         @auth
          @include('layouts.topbar')
+         @endauth
         <!-- Navbar End -->
         <main class="py-4">
             @yield('content')
         </main>
     </div>
-     <!-- Scripts -->
-     <script src="{{ asset('assets/js/jquery-3.6.1.min.js')}}"></script>
-     <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+    
 
      <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
     {{-- <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script> --}}
@@ -141,7 +138,7 @@
 
     <!-- JavaScript Libraries -->
     {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
-    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> --}}
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('halamanUser/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('halamanUser/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
