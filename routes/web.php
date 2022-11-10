@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProdukController;
+use App\Http\Controllers\Admin\TransaksiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,5 +48,10 @@ Route::prefix('/admin')->middleware(['auth','isAdmin'])->group(function(){
         Route::get('produks', 'index');
         Route::get('produks/create', 'create');
         Route::post('produks', 'store');
+    });
+
+    Route::controller(TransaksiController::class)->group(function () {
+        Route::get('transaksi', 'index');
+      
     });
 });

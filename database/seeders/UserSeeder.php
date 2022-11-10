@@ -31,41 +31,41 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
 
-        Category::create([
-            'nama'=> "lukman sholeh",
-            'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
-            'harga'=> 20000,
-            'stok' => 12,
-            'foto'=> "post-images/sF96fFDRdxNBJtt3s41LYK3Mnu2qqM8G7IgArfxN.jpg",
-            'status'=> 0
-        ]);
+        // Category::create([
+        //     'nama'=> "lukman sholeh",
+        //     'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
+        //     'harga'=> 20000,
+        //     'stok' => 12,
+        //     'foto'=> "post-images/sF96fFDRdxNBJtt3s41LYK3Mnu2qqM8G7IgArfxN.jpg",
+        //     'status'=> 0
+        // ]);
 
-        Category::create([
-            'nama'=> "Asmuin",
-            'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
-            'harga'=> 20000,
-            'stok' => 12,
-            'foto'=> "post-images/atOCcR26xoRsTgXdXjvMJo0RebsRhdjMxPduyKCx.jpg",
-            'status'=> 0
-        ]);
+        // Category::create([
+        //     'nama'=> "Asmuin",
+        //     'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
+        //     'harga'=> 20000,
+        //     'stok' => 12,
+        //     'foto'=> "post-images/atOCcR26xoRsTgXdXjvMJo0RebsRhdjMxPduyKCx.jpg",
+        //     'status'=> 0
+        // ]);
         
-        Category::create([
-            'nama'=> "mukhamad syaifullah",
-            'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
-            'harga'=> 20000,
-            'stok' => 12,
-            'foto'=> "post-images/opHZCwVSJ7AzCKdRPpWNTnf0Chp1uu73iAHoHCqO.jpg",
-            'status'=> 0
-        ]);
+        // Category::create([
+        //     'nama'=> "mukhamad syaifullah",
+        //     'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
+        //     'harga'=> 20000,
+        //     'stok' => 12,
+        //     'foto'=> "post-images/opHZCwVSJ7AzCKdRPpWNTnf0Chp1uu73iAHoHCqO.jpg",
+        //     'status'=> 0
+        // ]);
 
-        Category::create([
-            'nama'=> "mochamad arsyad",
-            'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
-            'harga'=> 20000,
-            'stok' => 12,
-            'foto'=> "post-images/2kLyUjXg0RllSsUMNvKZ5B2CNv27sguIu4AB5qM3.jpg",
-            'status'=> 0
-        ]);
+        // Category::create([
+        //     'nama'=> "mochamad arsyad",
+        //     'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
+        //     'harga'=> 20000,
+        //     'stok' => 12,
+        //     'foto'=> "post-images/2kLyUjXg0RllSsUMNvKZ5B2CNv27sguIu4AB5qM3.jpg",
+        //     'status'=> 0
+        // ]);
 
         // post-images/sF96fFDRdxNBJtt3s41LYK3Mnu2qqM8G7IgArfxN.jpg
     }

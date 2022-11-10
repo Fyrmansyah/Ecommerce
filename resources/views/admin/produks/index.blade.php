@@ -30,11 +30,15 @@
                             <td>{{$loop->iteration}}</td>
                             <td><img src="/produk-image/{{$item->image}}" alt="" width="40px" height="40px"></td>
                             <td>{{$item->nama}}</td>
-                            <td>{{$item->harga}}</td>
+                            <td>Rp. {{$item->harga}}</td>
                             <td>{{$item->stok}}</td>
                             <td>{{$item->deskripsi}}</td>
                             <td>{{$item->keterangan}}</td>
                             <td>{{$item->status}}</td>
+                            <td>
+                            <a href="{{ url('admin/produk/'.$item->id.'/edit') }}"class="btn btn-success">Edit</a>
+                                                <a href="#" wire:click="deleteProduk({{$item->id}})"data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Delete</a>
+                                            </td>
                         </tr>
                         @endforeach
                     </tbody>

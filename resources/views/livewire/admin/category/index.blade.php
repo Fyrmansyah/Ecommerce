@@ -9,7 +9,7 @@
       </div>
             <form wire:submit.prevent="destroyCategory">
 
-c
+
                  <div class="modal-body">
                 <h6> Apakah Data Akan Di Hapus?</h6>
                 </div>

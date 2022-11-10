@@ -20,6 +20,7 @@ class Produk extends Model
         'deskripsi',
         'status',
         'image',
+        'action',
     ];
 
     public function image()

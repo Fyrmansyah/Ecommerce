@@ -22,9 +22,7 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="detail-tab" data-bs-toggle="tab" data-bs-target="#detail-tab-pane" type="button" role="tab" aria-controls="detail-tab-pane fade bordered p-3" aria-selected="false">Detail</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane" type="button" role="tab" aria-controls="image-tab-pane" aria-selected="false">Image</button>
-            </li>
+        
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade border p-3 show active p-3" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -76,11 +74,7 @@
                     </div>
                 </div>
         </div>
-                <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
-                    <div class="mb-3">
-                        <label>Upload Image</label>
-                        {{-- <input type="file" name="image"  class="form-control"> --}}
-                    </div>
+               
                 </div>
                 </div>
                 <div>
