@@ -47,6 +47,6 @@ class User extends Authenticatable
     }
 
     public function transaction(){
-        return $this->belongsTo(transaction::class);
+        return $this->hasOne(transaction::class);
     }
 }

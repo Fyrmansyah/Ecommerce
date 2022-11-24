@@ -63,10 +63,14 @@ Route::middleware('auth')->group(function(){
             Route::get('produks/create', 'create');
             Route::post('produks', 'store');
         });
+
+        Route::controller(TransactionController::class)->group(function () {
+            Route::get('transaksi','adminindex');
+        });
+       
     });
 
-    Route::controller(TransaksiController::class)->group(function () {
-        Route::get('transaksi', 'index');
-      
-    });
+   
+    
+   
 });

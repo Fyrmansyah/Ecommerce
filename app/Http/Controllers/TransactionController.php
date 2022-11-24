@@ -11,6 +11,18 @@ class TransactionController extends Controller
         $datas = transaction::with('cart.produk')->get();
         return view('user.transaction', compact('datas'));
     }
+    public function transindex(){
+        return view('admin.transaksi.transindex');
+    }
 
-    
+    public function adminindex()
+    {
+        $data = transaction::get();
+        // $data = array('title' => 'Data Transaksi');
+        $datas = transaction::with('cart.produk', 'user')->get(); 
+        // return $datas;
+        return view('admin.transaksi.transindex',compact('datas'));
+
+    }
+
 }

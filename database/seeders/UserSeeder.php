@@ -19,19 +19,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'admin',
-            'role_as' => 1,
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('password')
-        ]);
+        // User::create([
+        //     'name' => 'admin',
+        //     'role_as' => 1,
+        //     'email' => 'admin@gmail.com',
+        //     'password' => Hash::make('password')
+        // ]);
 
-        User::create([
-            'name' => 'user',
-            'role_as' => 0,
-            'email' => 'user@gmail.com',
-            'password' => Hash::make('password')
-        ]);
+        // User::create([
+        //     'name' => 'user',
+        //     'role_as' => 0,
+        //     'email' => 'user@gmail.com',
+        //     'password' => Hash::make('password')
+        // ]);
 
         // Category::create([
         //     'nama'=> "lukman sholeh",
@@ -70,11 +70,11 @@ class UserSeeder extends Seeder
         // ]);
 
 
-        // transaction::create([
-        //     'cart_id'=> 1,
-        //     'user_id'=> 2,
-        //     'status'=> 1
-        // ]);  
+        transaction::create([
+            'cart_id'=> 1,
+            'user_id'=> 2,
+            'status'=> 1
+        ]);  
         
         // post-images/sF96fFDRdxNBJtt3s41LYK3Mnu2qqM8G7IgArfxN.jpg
     }

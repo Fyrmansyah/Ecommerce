@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.inc.admin.admin')
 
 @section('content')
 <div class="row">
@@ -25,16 +25,7 @@
                                 <div class=" mb-3">
                                     <label>Nama</label>
                                     <input type="text" name="nama" class="form-control" value="{{$category->nama}}"/>
-                                </div>
-                                <div class=" mb-3">
-                                    <label>Stok</label>
-                                    <input type="text" name="stok" class="form-control" value="{{$category->stok}}" >
-                                </div>
-                                <div class=" mb-3">
-                                    <label>Harga</label>
-                                    <input type="text" name="harga" class="form-control" value="{{$category->harga}}" >
-                                </div>
-                                <div class=" mb-3">
+                                </div>                             
                                     <label>Deskripsi</label>
                                     <textarea  name="deskripsi" class="form-control" rows="3" >{{$category->deskripsi}}</textarea>
                                     </div>

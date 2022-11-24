@@ -10,9 +10,9 @@
           
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/admin/dashboard">
-              <i class="mdi mdi-home menu-icon"></i>
-              <span class="menu-title">Kelas</span>
+            <a class="nav-link" href="/admin/transaksi">
+              <i class="mdi mdi-cash-usd menu-icon"></i>
+              <span class="menu-title">Transaksi</span>
             </a>
           </li>
 
