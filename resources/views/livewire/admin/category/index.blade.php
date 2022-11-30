@@ -28,11 +28,13 @@
             <div class="col-md-12 ">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Barang 
+                        <h3 class="card-title">
+                            Category 
                             <a href="{{url ('admin/category/create') }}" class="btn btn-primary float-end">Tambah Category</a>
-                        </h3>
+                         </h3>
+                         </div>
                             <div class="card-body">
-                               <table class="table table-bordered table-striped">
+                               <table class="table table-striped table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th width="5%">ID</th>
@@ -58,7 +60,7 @@
                                <div>
                                {{$categories->links()}}
                                </div>
-                        <div class="row">
+                              <div class="row">
                                     <div class="col-md-3">
                                         <img src="">
                                     </div>
@@ -66,7 +68,6 @@
                             </div>
 
                         </div>
-                    </div>
                 </div>
            </div>
 </div>

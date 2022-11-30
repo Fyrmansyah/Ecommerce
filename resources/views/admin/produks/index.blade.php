@@ -6,13 +6,14 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-        <div class="card-header">
-            <h3>Produk 
+         <div class="card-header">
+            <h3 class="card-title">
+                Produk
             <a href="{{url ('admin/produks/create') }}" class="btn btn-primary float-end">Tambah Produk</a>           
             </h3>       
-        </div>
+          </div>
             <div class="card-body">
-                <table class="table-responsive table table-bordered">
+                <table class="table-responsive table table-bordered ">
                     <thead>
                         <th>No</th>
                         <th>foto</th>

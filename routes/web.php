@@ -66,6 +66,8 @@ Route::middleware('auth')->group(function(){
 
         Route::controller(TransactionController::class)->group(function () {
             Route::get('transaksi','adminindex');
+            Route::post('transaksi','adminupdate');
+            
         });
        
     });
