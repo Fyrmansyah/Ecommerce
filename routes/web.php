@@ -26,14 +26,16 @@ Auth::routes();
 
 
 Route::middleware('auth')->group(function(){
-    Route::controller(CategoryController::class)->group(function () {
-        Route::get('category/{id}/filter', 'filter');
-        Route::get('category/filter', 'indexUser');
-        Route::get('category/all', 'getAllProducts');
+    Route::prefix('/category')->controller(CategoryController::class)->group(function () {
+        Route::get('/{id}/filter', 'filter');
+        Route::get('/filter', 'indexUser');
+        Route::get('/all', 'getAllProducts');
+        Route::get('/search', 'search');
     });
     
     Route::controller(TransactionController::class)->group(function () {
         Route::get('/transaction', 'index');
+        Route::put('/uploadbukti', 'uploadImg');
     });
     
     Route::controller(HomeController::class)->group(function () {
@@ -43,6 +45,10 @@ Route::middleware('auth')->group(function(){
         Route::get('/cart', 'cart');
         Route::get('/getcart', 'getCart');
         Route::post('/addcart', 'addCart');
+        Route::post('/addtransaction', 'addTrans');
+        Route::put('/updateqty', 'updateQty');
+        Route::delete('/deletecart/{id}', 'deleteCart');
+
     });
 
 

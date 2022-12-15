@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Produk;
+use App\Models\order;
+use App\Models\order_detail;
 use App\Models\cart;
 use Illuminate\Support\Facades\Auth;
 
@@ -87,4 +89,57 @@ class HomeController extends Controller
             "message" => "barang berhasil ditambahkan ke keranjang"
         ]);
     }
+
+    public function addTrans(){
+
+        // return request()->post('total');
+
+        order_detail::create([
+            'user_id' => Auth::user()->id,
+            'status' => 1,
+            'total' => request()->post('total')
+        ]);
+
+        $order = order_detail::latest()->first();
+        // return $order->id;
+        foreach (request()->cartId as $key => $loop) {
+            // echo $loop;
+            // echo request()->qty[$key];
+            order::create([
+                'produk_id' => $loop,
+                'order_details_id' =>  $order->id,
+                'jumlah' => request()->qty[$key]
+            ]); 
+        }
+        
+
+        return response()->json([
+            "success" => true,
+            "message" => 'barang berhasil di check out'
+        ]);
+    }
+
+    public function updateQty(){
+
+        // return request();
+        cart::where('produk_id', request()->id)->update([
+            'jumlah' => request()->qty
+        ]);
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'qty barang berhasil di update'
+        ]);
+    }
+
+    public function deleteCart($id){
+        cart::destroy($id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'cart barang berhasil di hapus'
+        ]);
+    }
+
+
 }

@@ -49,4 +49,8 @@ class User extends Authenticatable
     public function transaction(){
         return $this->belongsTo(transaction::class);
     }
+
+    public function order_detail(){
+        return $this->belongsTo(order_detail::class);
+    }
 }

@@ -30,5 +30,10 @@ class Produk extends Model
     public function cart(){
         return $this->hasMany(cart::class);
     }
+
+    public function order()
+    {
+        return $this->hasMany(order::class);
+    }
    
 }

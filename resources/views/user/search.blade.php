@@ -1,5 +1,3 @@
-@extends('layouts.app')
-@section('content')
 
     <!-- Breadcrumb Start -->
     <div class="container-fluid">
@@ -56,14 +54,14 @@
                         <input onclick="cbAllCategory()" type="checkbox" class="custom-control-input" checked id="category-all">
                         <label class="custom-control-label" for="category-all">All category</label>
                     </div>
-                    <form>
+                    {{-- <form>
                         @foreach ($categories as $category)
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input filter" value="{{$category->id}}" id="category-{{$category->id}}" onclick="cbFilter(event, {{$category->id}})">
                             <label class="custom-control-label" for="category-{{$category->id}}">{{$category->nama}}</label>
                         </div>
                         @endforeach
-                    </form>
+                    </form> --}}
                 </div>
                 <!-- category End -->
 
@@ -124,6 +122,29 @@
                         </div>
                     </div>
                     <div id="produks" class="d-flex">
+                                            
+                    @foreach ($categories as $item)
+                        <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src="{{ asset('/produk-image/'.$item->image)}}" alt="">
+                                    <div class="product-action">
+                                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate" href="/detail/{{$item->id}}">{{$item->nama}}</a>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5>Rp. {{$item->harga}}</h5><h6 class="text-muted ml-2"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    @endforeach
                     </div>
                 </div>
             </div>
@@ -207,157 +228,3 @@
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-    <script>
-        $(document).ready(function() {
-            getAll()
-        });
-        
-        function getAll(){
-            $.ajax({
-                url: "/category/all",
-                type:"GET",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(res){
-                    if(res.length < 1){
-                        $("#produks").html('<h1>produk kosong kontol</h1>')
-                    }
-                    // console.log(res)
-                    let data= []
-                    for (i = 0; i < res.length; i++) {
-                        data[i] =
-                        '<div class="col-lg-4 col-md-6 col-sm-6 pb-1">'+
-                            '<div class="product-item bg-light mb-4">'+
-                                '<div class="product-img position-relative overflow-hidden">'+
-                                    '<img class="img-fluid w-100" src="/produk-image/'+res[i].image+'" alt="">'+
-                                    '<div class="product-action">'+
-                                        '<a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>'+
-                                        '<a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>'+
-                                        '<a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>'+
-                                        '<a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>'+
-                                    '</div>'+
-                                '</div>'+
-                                '<div class="text-center py-4">'+
-                                    '<a class="h6 text-decoration-none text-truncate" href="/detail/'+res[i].id+'">'+res[i].nama+'</a>'+
-                                    '<div class="d-flex align-items-center justify-content-center mt-2">'+
-                                        '<h5>Rp. '+res[i].harga+'</h5><h6 class="text-muted ml-2"></h6>'+
-                                    '</div>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'
-                    }
-                    for (i = 0; i < res.length; i++) {
-                        // console.log(data[i])
-                        $("#produks").html(data)
-                    }
-                
-
-                },
-                error: function(error) {
-                    console.log(error)
-                }
-            });
-        }
-
-        function cbAllCategory(){
-            getAll()
-            $('.filter').prop('checked', false);
-        }
-
-        function cbFilter(e, id) {
-            let valueFilter = []
-            $.each(document.forms[3], (index, val) => {
-                if (val.checked) {
-                    valueFilter.push(val.value)
-                } 
-            })
-
-            
-            if(valueFilter.length >= 1){
-                $('#category-all').prop("checked", false)
-                ajaxFilter(id, valueFilter)
-            }else{
-                $('#category-all').prop("checked", true)
-                getAll()
-            } 
-        }
-
-        function ajaxFilter(id, valueFilter){
-            $.ajax({
-                url: "/category/"+ id +"/filter",
-                type:"GET",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {valueFilter},
-                success: function(res){
-                    let data= []
-                    $.each(res.data, (index, value) => {
-                        data[index] =
-                        '<div class="col-lg-4 col-md-6 col-sm-6 pb-1">'+
-                            '<div class="product-item bg-light mb-4">'+
-                                '<div class="product-img position-relative overflow-hidden">'+
-                                    '<img class="img-fluid w-100" src="/produk-image/'+value.image+'" alt="">'+
-                                    '<div class="product-action">'+
-                                        '<a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>'+
-                                        '<a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>'+
-                                        '<a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>'+
-                                        '<a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>'+
-                                    '</div>'+
-                                '</div>'+
-                                '<div class="text-center py-4">'+
-                                    '<a class="h6 text-decoration-none text-truncate" href="/detail/'+value.id+'">'+value.nama+'</a>'+
-                                    '<div class="d-flex align-items-center justify-content-center mt-2">'+
-                                        '<h5>Rp. '+value.harga+'</h5><h6 class="text-muted ml-2"></h6>'+
-                                    '</div>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'
-                    });
-                    $.each(res.data, () => {
-                        $("#produks").html(data)
-                    })
-                    // console.log(res.data)
-                    if(res.data.length < 1){
-                        $("#produks").html('<h1>produk kosong kontol</h1>')
-                    }
-                    // for (i = 0; i < res.data.length; i++) {
-                    //     // console.log(true)
-                    //     // $("#produks").html(
-                    //     // '<h1>asdasdfsdf</h1>'+ '<hr>' +
-                    //     // '<p>halooooooooooo</>'
-                    //     // );
-                    //     $("#produks").html(
-                    //     '<div class="col-lg-4 col-md-6 col-sm-6 pb-1">'+
-                    //         '<div class="product-item bg-light mb-4">'+
-                    //             '<div class="product-img position-relative overflow-hidden">'+
-                    //                 '<img class="img-fluid w-100" src="/produk-image/'+res.data[i].image+'" alt="">'+
-                    //                 '<div class="product-action">'+
-                    //                     '<a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>'+
-                    //                     '<a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>'+
-                    //                     '<a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>'+
-                    //                     '<a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>'+
-                    //                 '</div>'+
-                    //             '</div>'+
-                    //             '<div class="text-center py-4">'+
-                    //                 '<a class="h6 text-decoration-none text-truncate" href="/detail/'+res.data[i].id+'">'+res.data[i].nama+'</a>'+
-                    //                 '<div class="d-flex align-items-center justify-content-center mt-2">'+
-                    //                     '<h5>Rp. '+res.data[i].harga+'</h5><h6 class="text-muted ml-2"></h6>'+
-                    //                 '</div>'+
-                    //             '</div>'+
-                    //         '</div>'+
-                    //     '</div>'
-                    //     );
-                    // }
-                    // $("#produks").html("<h1>kontol</>");
-                    // console.log(res.data)
-                },
-                error: function(error) {
-                    console.log(error)
-                }
-            });
-        }
-    </script>
-@endsection

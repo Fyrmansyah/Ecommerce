@@ -51,7 +51,7 @@
         <div class="container-fluid">
             <div class="d-flex align-items-center bg-light py-3 px-xl-5 ">
                 <div class="col-4">
-                    <a href="/" class="text-decoration-none">
+                    <a href="/home" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">koperasi</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">ku</span>
                     </a>
@@ -60,7 +60,7 @@
                 <div class="text-left w-25 mx-auto">
                     <form action="">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for products">
+                            <input onkeyup="search(this.value)" type="text" class="form-control" placeholder="Search for products">
                             <div class="input-group-append">
                                 <span class="input-group-text bg-transparent text-primary">
                                     <i class="fa fa-search"></i>
@@ -119,7 +119,7 @@
          @include('layouts.topbar')
          @endauth
         <!-- Navbar End -->
-        <main class="py-4">
+        <main class="py-4" id="main">
             @yield('content')
         </main>
     </div>
@@ -131,6 +131,7 @@
     {{-- <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script> --}}
     @livewireScripts
 
+   
 
 
     <!-- ======================================= -->
@@ -150,3 +151,25 @@
     <script src="{{ asset('halamanUser/js/main.js') }}"></script>
 </body>
 </html>
+<script>
+    function search(val){
+        $.ajax({
+            url: "/category/search",
+            type:"GET",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:{ val },
+            success: function(res){
+                // if(res.success){
+                //     alert(res.message)
+                // }
+                $("#main").html(res.html)
+                // console.log(res)
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        });
+    }
+</script>

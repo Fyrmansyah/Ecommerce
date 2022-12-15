@@ -15,27 +15,32 @@
                 </thead>
                 <tbody class="align-middle">
                     @foreach ($data as $cart)
-                        <tr>
+                        <tr id="">
+                            <input type="hidden" name="id" value="{{$cart->id}}" id="cartId">
                             <td><img class="rounded-circle" src="/produk-image/{{$cart->produk->image}}" alt="" style="width: 50px;"></td>
                             <td class="align-middle">{{$cart->produk->nama}}</td>
                             <td class="align-middle" id="harga">Rp. {{$cart->produk->harga}}</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" onclick="ahayy({{$cart->produk->harga}}, {{$cart->produk->id}}, 'min')">
+                                        <button class="btn btn-sm btn-primary btn-minus" onclick="qtyact({{$cart->produk->harga}}, {{$cart->produk->id}}, 'min')">
                                         <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input id="jumlah{{$cart->produk->id}}" type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{$cart->jumlah}}">
+                                    <input id="jumlah{{$cart->produk->id}}" type="text" class="qty form-control form-control-sm bg-secondary border-0 text-center" value="{{$cart->jumlah}}">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus" onclick="ahayy({{$cart->produk->harga}}, {{$cart->produk->id}}, 'plus')">
+                                        <button class="btn btn-sm btn-primary btn-plus" onclick="qtyact({{$cart->produk->harga}}, {{$cart->produk->id}}, 'plus')">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle" id="totalperitem{{$cart->produk->id}}">Rp. {{$cart->produk->harga * $cart->jumlah}}</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                            <td class="align-middle totalcart" id="totalperitem{{$cart->produk->id}}">Rp. {{$cart->produk->harga * $cart->jumlah}}</td>
+                            <td class="align-middle">
+                                <button class="btn btn-sm btn-danger" onclick="rmvRow(this, {{$cart->id}})">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -65,36 +70,132 @@
                 <div>
                     <div class="d-flex justify-content-between ">
                         <h5>Total</h5>
-                        <h5>$160</h5>
+                        <h5 id="totalcart"></h5>
                     </div>
-                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                    <button onclick="addTrans()" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
 
 <script> 
-
-// $('#jumlah').on('input', function() {
-    //  alert("adfasdfasdfsadf")
-    // });
+    $(document).ready(function() {
+            totalCount()
+    });
+        
     
-    function ahayy(harga, id, act) {
+    function addTrans(){
+        let inputId = $('input[name=id]')
+        let inputQty = $('input.qty')
+        let total = parseInt( $('#totalcart').text().replace('Rp. ','') )
+        // console.log(total)
+        let cartId = []
+        let qty = []
+        $.each( inputId, function( key, value ) {
+            cartId.push(value.value)
+        });
+        $.each( inputQty, function( key, value ) {
+            qty.push(value.value)
+        });
+
+        $.ajax({
+            url: "/addtransaction",
+            type:"POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:{ qty, cartId, total },
+            success: function(res){
+                // if(res.success){
+                //     alert(res.message)
+                // }
+                console.log(res)
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        });
+        // console.log(cartId)
+    }
+
+    function rmvRow(btn, id){
+        var row = btn.parentNode.parentNode
+        row.parentNode.removeChild(row);
+        $.ajax({
+            url: "/deletecart/"+id,
+            type:"DELETE",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(res){
+                // if(res.success){
+                //     alert(res.message)
+                // }
+                console.log(res)
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        });
+        totalCount()
+    }
+
+    function totalCount(){
+        var arr = 0;
+        $("table tr .totalcart").map(function() {
+             arr += parseInt($(this).text().replace('Rp. ',''));
+        });
+        $("#totalcart").text('Rp. '+ arr)
+    }
+
+    function qtyact(harga, id, act) {
+        
         let jumlah = $('#jumlah'+id).val() 
         // let harga = $('#harga').val()
-        act == 'plus' 
-        ?  $('#totalperitem'+id).text("Rp. "+(harga*(parseInt(jumlah)+1))) 
-        : $('#totalperitem'+id).text("Rp. "+(harga*(parseInt(jumlah)-1))) 
-       
-        // console.log(act)
-    };
-    // $(document).ready(function () {
-    //   setTimeout(function () {
-    //     alert('Reloading Page');
-    //     location.reload(true);
-    //   }, 5000);
-    // });
-
+        if(act == 'plus'){
+            const qty = parseInt(jumlah)+1
+            $('#totalperitem'+id).text("Rp. " + harga * qty)
+            $.ajax({
+                url: "/updateqty",
+                type:"PUT",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{ qty, id },
+                success: function(res){
+                    // if(res.success){
+                    //     alert(res.message)
+                    // }
+                    console.log(res)
+                },
+                error: function(error) {
+                    console.log(error)
+                }
+            });
+        }else{
+            const qty = parseInt(jumlah)-1;
+            $('#totalperitem'+id).text("Rp. "+(harga* qty))
+            $.ajax({
+                url: "/updateqty",
+                type:"PUT",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{ qty, id },
+                success: function(res){
+                    // if(res.success){
+                    //     alert(res.message)
+                    // }
+                    console.log(res)
+                },
+                error: function(error) {
+                    console.log(error)
+                }
+            });
+        }
+        totalCount()
+    }
 </script>
+@endsection
+

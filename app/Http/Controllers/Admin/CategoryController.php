@@ -23,6 +23,20 @@ class CategoryController extends Controller
     {
         return response()->json(produk::get()); 
     }
+
+    public function search()
+    {
+        if(request()->has('val')){
+            $categories = produk::where('nama', 'LIKE', '%'.request()->get('val').'%')->get();
+        }else{
+            $categories = produk::get();
+        }
+        $html = view('user.search', compact('categories'))->render();
+        return response()->json([
+            'success' => true,
+            'html' => $html
+        ], 200);
+    }
     
     public function filter($id, Request $request)
     {
