@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -62,12 +62,25 @@ Route::middleware('auth')->group(function(){
             Route::post('category', 'toko'); //request data
             Route::get('category/{category}/edit', 'edit'); //request view
             Route::post('category/{category}/update', 'update'); //request data
+            Route::delete('category/{category}/destroy', 'destroy'); 
         });
 
         Route::controller(ProdukController::class)->group(function () {
             Route::get('produks', 'index');
             Route::get('produks/create', 'create');
             Route::post('produks', 'store');
+            Route::get('produks/edit/{id}', 'edit'); //view
+            Route::post('produks/{id}/edit', 'update'); //data
+            Route::post('produks/delete/{id}', 'destroy'); //data
+        });
+
+        Route::controller(TransactionController::class)->group(function () {
+            Route::get('/masteradm', 'masterAdm');
+            Route::get('/buktiadm', 'buktiAdm');
+            Route::get('/riwayatadm', 'riwayatAdm');
+            Route::get('/prosesadm', 'prosesAdm');
+            Route::get('/canceltrans/{id}', 'cancelTrans');
+            Route::get('/completetrans/{id}', 'completeTrans');
         });
     });
 });

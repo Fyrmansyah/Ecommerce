@@ -61,6 +61,10 @@
                              
                             <hr class="m-0">
                             <div class="d-flex justify-content-between align-items-center">
+                                <p class="mb-0 mt-1">nomor invoice</p><hr>
+                                <p class="mb-0 mt-1 text-warning">{{$modaltrans->nomor_transaksi}}</p>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
                                 <p class="mb-0 mt-1">Tanggal Pembelian</p><hr>
                                 <p class="mb-0 mt-1">{{$modaltrans->created_at}}</p>
                             </div>
@@ -94,14 +98,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <h3 class="mb-3">daftar transaksi</h3>
+            <h3 class="mb-3">Daftar Transaksi</h3>
             <div class="card p-3">
-                @foreach ($datas as $data)
+                @forelse ($datas as $data)
                 <div class="shadow p-1 mb-5 card">
                     <div class="d-flex align-items-center card-header">
                         <i class="fas fa-shopping-cart mr-3"></i>
                         <b class="mr-3">belanja</b>
-                        <p class="m-0 mr-3">{{$data->created_at}}</p>
+                        <p class="font-monospace m-0 mr-3">{{$data->created_at}}</p>
                         @if($data->status == 1)
                         <span class="badge p-2 bg-warning">
                             menunggu pembayaran <i class="far fa-clock"></i>
@@ -119,6 +123,7 @@
                             diproses <i class="fas fa-shipping-fast"></i>
                         </span>
                         @endif
+                        <p class="m-0 font-monospace ml-3">{{$data->nomor_transaksi}}</p>
                     </div>
                     @foreach ($data->order->take(1) as $item)
                     <div class="d-flex my-4 p-1 px-3 card-body">
@@ -145,12 +150,14 @@
                     @elseif($data->status == 4)
                     <button  data-bs-toggle="modal" data-bs-target="#modalTrans{{$data->id}}" class="p-2 w-25 btn btn-outline-warning m-0 mr-3 my-auto ml-auto">detail transaksi</button>
                     @endif
-                   
+                
 
-                       
+                    
                     </div>
                 </div>  
-                @endforeach
+                @empty
+                <h4 class="text-center m-3">Belum Ada Transaksi</h4>
+                @endforelse
                 {{-- <div class="shadow p-4 mb-4">
                     <div class="d-flex align-items-center mb-3">
                         <i class="fas fa-shopping-cart mr-3"></i>
@@ -197,6 +204,7 @@
                         <button class="p-2 btn btn-warning rounded w-25 text-white">beli lagi</button>
                     </div>
                 </div> --}}
+                    {{ $datas->links() }}
             </div>  
         </div>
     </div>

@@ -13,7 +13,8 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        $produk = Produk::all();
+        $produk = Produk::with('category')->get();
+        // return $produk;
         return view('admin.produks.index', compact('produk'));
     }   
 
@@ -67,5 +68,40 @@ class ProdukController extends Controller
         }
         return 'null';
 
+    }
+
+    public function edit($id){
+        // return $id;
+        $produks = Produk::with('category')->find($id);
+        // return $produks;
+        $categories = Category::all();
+        return view('admin.produks.edit', compact('categories', 'produks'));
+    }
+    
+    public function update($id){
+        $data = [
+            'nama' => request()->nama,
+            'stok' => request()->stok,
+            'harga' => request()->harga,
+            'deskripsi' => request()->deskripsi,
+            'keterangan' => request()->keterangan
+        ];
+        
+        if(request()->image){
+            $file = request()->file('image');
+            $nama_file = time()."_".$file->getClientOriginalName();
+            $tujuan_upload='./produk-image';
+            $file->move($tujuan_upload,$nama_file);
+            $data['image'] = $nama_file;
+        }
+
+        Produk::where('id', $id)->update($data);
+
+        return redirect('/admin/produks');
+    }
+
+    public function destroy($id){
+        Produk::destroy($id);
+        return redirect()->back();
     }
 }

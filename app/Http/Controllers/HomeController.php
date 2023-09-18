@@ -33,7 +33,7 @@ class HomeController extends Controller
         // $cart = cart::where("user_id", Auth::user()->id)->count();
         // return $cart;
         $categories = category::get();
-        $produks = produk::get();
+        $produks = produk::where('status', 0)->paginate(4);
         // return $categories;
         return view('user.home', compact("categories", 'produks'));
     }
@@ -67,14 +67,23 @@ class HomeController extends Controller
     public function addCart(Request $request)
     {
         // $data = category::find($id);
+        $produk = produk::find($request->categoryId);
+        if($produk->stok < $request->jumlah){
+            return response()->json([
+                "success" => false,
+                "message" => "stok barang tidak mencukupi"
+            ]);
+        }
+
         $existCart = cart::where("user_id", $request->userId)->where("produk_id" , $request->categoryId)->count();
         if($existCart >= 1){
-            cart::where("user_id", $request->userId)->where("produk_id" , $request->categoryId)
-            ->update([
-                "user_id" => $request->userId,
-                "produk_id" => $request->categoryId ,
-                "jumlah"=> $request->jumlah
-            ]);
+            cart::where("user_id", $request->userId)
+                ->where("produk_id" , $request->categoryId)
+                ->update([
+                    "user_id" => $request->userId,
+                    "produk_id" => $request->categoryId ,
+                    "jumlah"=> $request->jumlah
+                ]);
         } else {
 
             cart::create([
@@ -92,26 +101,46 @@ class HomeController extends Controller
 
     public function addTrans(){
 
-        // return request()->post('total');
+        $produks = produk::whereIn('id', request()->cartId)->orderBy('id', 'desc')->get();
+        foreach (request()->qty as $key => $value) {
+            if($produks[$key]->stok < $value){
+                return response()->json([
+                    "message" => 'stok tidak mencukupi!',
+                    "success" => false,
+                ]);
+            }
+        }
 
         order_detail::create([
+            'nomor_transaksi' => 'KK' .'-'.str_pad( order_detail::count(), 4, "0", STR_PAD_LEFT ) .'-'. date('dmY'),
             'user_id' => Auth::user()->id,
             'status' => 1,
             'total' => request()->post('total')
         ]);
 
-        $order = order_detail::latest()->first();
-        // return $order->id;
-        foreach (request()->cartId as $key => $loop) {
-            // echo $loop;
-            // echo request()->qty[$key];
+        $order_details = order_detail::latest()->first();
+
+        foreach (produk::whereIn('id', request()->cartId )->get() as $key => $loop) {                     
             order::create([
-                'produk_id' => $loop,
-                'order_details_id' =>  $order->id,
+                'produk_id' => $loop->id,
+                'order_details_id' =>  $order_details->id,
                 'jumlah' => request()->qty[$key]
             ]); 
+
+            produk::where('id', $loop->id)->update([
+                'stok' => $loop->stok - request()->qty[$key]
+            ]);
+
         }
+        // return produk::whereIn('id', request()->cartId )->get();
         
+        foreach (produk::whereIn('id', request()->cartId )->get() as $index => $key) {
+            if($key->stok < 1){
+                produk::where('id', $key->id)->update([
+                    'status' => 1
+                ]);
+            }
+        }
 
         return response()->json([
             "success" => true,

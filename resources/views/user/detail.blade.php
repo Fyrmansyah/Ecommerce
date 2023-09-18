@@ -205,8 +205,22 @@
         data:{ jumlah, categoryId, userId},
         success: function(res){
             if(res.success){
-                alert(res.message)
+                Swal.fire({
+                    icon: 'success',
+                    title: res.message,
+                    showConfirmButton: false,
+                    timer: 5000,
+                    footer: '<a href="/cart">lihat keranjang belanja </a>'
+                })
                 $('#jumlah').val(1)
+            }else{
+                Swal.fire({
+                    icon: 'warning',
+                    title: res.message,
+                    showConfirmButton: false,
+                    timer: 1000,
+                    // footer: '<a href="/cart">lihat keranjang belanja </a>'
+                })
             }
         //   console.log(response)
         },

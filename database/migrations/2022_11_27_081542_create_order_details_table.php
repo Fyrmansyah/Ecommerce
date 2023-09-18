@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor_transaksi');
             $table->foreignId('user_id')->constrained('users');
             $table->integer('status');
             $table->string('bukti_img')->nullable();

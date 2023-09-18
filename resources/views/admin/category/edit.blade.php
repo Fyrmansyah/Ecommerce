@@ -1,62 +1,37 @@
 @extends('layouts.admin')
-
-@section('content')
-<div class="row">
-    
-        <div class="col-md-12 ">           
-            <div class="card">
-            @if(count($errors)>0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $item)
-                        <li>{{$item}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-                <div class="card-header">
-                    <h3>edit Barang 
-                    <a href="{{url ('admin/category') }}" class="btn btn-dark float-end">Kembali </a>           
-                    </h3>       
-                        <div class="row">
-                        <div class="card-body">
-                            <form action="{{url('admin/category/'.$category->id.'/update') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class=" mb-3">
-                                    <label>Nama</label>
-                                    <input type="text" name="nama" class="form-control" value="{{$category->nama}}"/>
-                                </div>
-                                <div class=" mb-3">
-                                    <label>Stok</label>
-                                    <input type="text" name="stok" class="form-control" value="{{$category->stok}}" >
-                                </div>
-                                <div class=" mb-3">
-                                    <label>Harga</label>
-                                    <input type="text" name="harga" class="form-control" value="{{$category->harga}}" >
-                                </div>
-                                <div class=" mb-3">
-                                    <label>Deskripsi</label>
-                                    <textarea  name="deskripsi" class="form-control" rows="3" >{{$category->deskripsi}}</textarea>
-                                    </div>
-                                <div class=" mb-3">
-                                    <label>Foto</label>
-                                    <input type="file" name="foto" class="form-control mb-2"/ >
-                                    <img src="/storage/{{$category->foto}}" alt="" width="200px" height="200px">
-                                    </div>
-                                <div class=" mb-3">
-                                    <label>Status</label>
-                                    <input type="checkbox" name="status" {{ ($category->status) ? "checked" : "" }} }>
-                                </div>
-                                <div class=" mb-3">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary fload-end"> Update </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+@section('title', 'Edit Kategori')         
+@section('content')         
+@if(count($errors)>0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $item)
+            <li>{{$item}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<div class="card p-4">
+    <h3 class="fw-bold mb-3">EDIT CATEGORY 
+        <a href="{{url ('admin/category') }}" class="btn btn-warning rounded-pill float-end">Kembali </a>           
+    </h3>       
+    <div class="card-header m-3 p-4 shadow">
+        <form action="{{url('admin/category/'.$category->id.'/update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class=" mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" name="nama" class="form-control" value="{{$category->nama}}"/>
             </div>
-        </div>
+            <div class=" mb-3">
+                <label class="form-label">Deskripsi</label>
+                <textarea  name="deskripsi" class="form-control" rows="3" >{{$category->deskripsi}}</textarea>
+            </div>
+            <div class=" mb-4">
+                <label class="form-label">Foto</label>
+                <input type="file" name="foto" class="form-control mb-2"/ >
+                <img src="/storage/{{$category->foto}}" alt="" width="200px" height="200px">
+            </div>
+            <button type="submit" class="btn btn-warning rounded-pill"> Update </button>
+        </form>
+    </div>
 </div>
 @endsection

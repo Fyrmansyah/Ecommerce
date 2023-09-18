@@ -33,57 +33,28 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
 
-        Category::create([
-            'nama'=> "category1",
-            'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
-            'foto'=> "post-images/sF96fFDRdxNBJtt3s41LYK3Mnu2qqM8G7IgArfxN.jpg",
-            'status'=> 0
-        ]);
+        for ($i=1; $i <= 10; $i++) { 
+            Category::create([
+                'nama'=> "category".$i,
+                'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
+                'foto'=> "post-images/YU5m3USW54iI4qReKRGUZu0IJJ4h5IMk5dMRZNXX.jpg",
+                'status'=> 0
+            ]);
+        }
 
-        Category::create([
-            'nama'=> "category2",
-            'deskripsi'=> "Lorem Ipsum is simply dummy text of the simply dummy text of the prin",
-            'foto'=> "post-images/sF96fFDRdxNBJtt3s41LYK3Mnu2qqM8G7IgArfxN.jpg",
-            'status'=> 0
-        ]);
+        for ($i=1; $i <= 10; $i++) { 
+            produk::create([
+                'category_id'=> $i,
+                'image'=> "1667646475_IMG-20210526-WA0068.jpg",
+                'nama'=> "produk".$i,
+                'harga'=> 10000 * $i,
+                'stok'=> 12,
+                'deskripsi'=> "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima consequuntur temporibus obcaecati, mollitia optio voluptatibus?",
+                'keterangan'=> "kelas 12",
+                'status'=> 0
+            ]); 
+        }
 
-        produk::create([
-            'category_id'=> 1,
-            'image'=> "1667646475_IMG-20210526-WA0068.jpg",
-            'nama'=> "produk1",
-            'harga'=> 12000,
-            'stok'=> 12,
-            'deskripsi'=> "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima consequuntur temporibus obcaecati, mollitia optio voluptatibus?",
-            'keterangan'=> "kelas 12",
-            'status'=> 0
-        ]); 
-
-        produk::create([
-            'category_id'=> 1,
-            'image'=> "1667646475_IMG-20210526-WA0068.jpg",
-            'nama'=> "produk2",
-            'harga'=> 12000,
-            'stok'=> 12,
-            'deskripsi'=> "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima consequuntur temporibus obcaecati, mollitia optio voluptatibus?",
-            'keterangan'=> "kelas 12",
-            'status'=> 0
-        ]); 
-        produk::create([
-            'category_id'=> 2,
-            'image'=> "1667646475_IMG-20210526-WA0068.jpg",
-            'nama'=> "produk3",
-            'harga'=> 12000,
-            'stok'=> 12,
-            'deskripsi'=> "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima consequuntur temporibus obcaecati, mollitia optio voluptatibus?",
-            'keterangan'=> "kelas 12",
-            'status'=> 0
-        ]); 
-
-        // transaction::create([
-        //     'cart_id'=> 1,
-        //     'user_id'=> 2,
-        //     'status'=> 1
-        // ]);  
         
         // post-images/sF96fFDRdxNBJtt3s41LYK3Mnu2qqM8G7IgArfxN.jpg
     }

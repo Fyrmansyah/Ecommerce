@@ -7,19 +7,24 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
+    {{-- chart js --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
  
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('admin/vendors/mdi/css/materialdesignicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/vendors/base/vendor.bundle.base.css') }}">
   <!-- endinject -->
+
   <!-- plugin css for this page -->
   <link rel="stylesheet" href="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
   <!-- End plugin css for this page -->
+
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
   <!-- endinject -->
+
   <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
 
  @livewireStyles

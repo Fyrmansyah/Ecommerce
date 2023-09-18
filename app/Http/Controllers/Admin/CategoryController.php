@@ -21,17 +21,19 @@ class CategoryController extends Controller
 
     public function getAllProducts()
     {
-        return response()->json(produk::get()); 
+        return response()->json(produk::where('status', 0)->get()); 
     }
 
     public function search()
     {
+        $value = request()->get('val');
+        $categories = Category::get();
         if(request()->has('val')){
-            $categories = produk::where('nama', 'LIKE', '%'.request()->get('val').'%')->get();
+            $produks = produk::where('status', 0)->where('nama', 'LIKE', '%'.request()->get('val').'%')->get();
         }else{
-            $categories = produk::get();
+            $produks = produk::where('status', 0)->get();
         }
-        $html = view('user.search', compact('categories'))->render();
+        $html = view('user.search', compact('produks', 'categories', 'value'))->render();
         return response()->json([
             'success' => true,
             'html' => $html
@@ -40,14 +42,15 @@ class CategoryController extends Controller
     
     public function filter($id, Request $request)
     {
-        // return $request;
+        // return request();
 
         foreach ($request->valueFilter as $item) {
             $data[] = $item;
         }
 
         // return $data;
-        $produks = produk::whereIn('category_id', $data)->get();
+        $produks = produk::where('status', 0)->whereIn('category_id', $data)->get();
+        // return $produks;
 
         return response()->json([
             "data" => $produks,
@@ -57,25 +60,14 @@ class CategoryController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     // ================================================================================
     // ================================== FOR ADMIN ===================================
     // ================================================================================
 
     public function index()
     {
-        // return "k";
-        return view('admin.category.index');
+        $categories = Category::orderBy('id','DESC')->paginate(5);
+        return view('admin.category.index',compact('categories'));
     }
     
     public function create()
@@ -140,5 +132,12 @@ class CategoryController extends Controller
 
         category::where('id', $category)->update($update);
         return redirect('admin/category')->with('message','Category berhasil di perbarui');
+    }
+
+    public function destroy($category)
+    {
+        // return $category;
+        Category::destroy($category);
+        return redirect()->back();
     }
 }

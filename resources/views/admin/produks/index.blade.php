@@ -1,51 +1,65 @@
 @extends('layouts.admin')
-
+@section('title', 'Produk')
 @section('content')
-
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-        <div class="card-header">
-            <h3>Produk 
-            <a href="{{url ('admin/produks/create') }}" class="btn btn-primary float-end">Tambah Produk</a>           
-            </h3>       
+<!-- Modal Delete-->
+@foreach($produk as $mdl)
+<div class="modal fade" id="deletemodal{{$mdl->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Hapus Produk</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-            <div class="card-body">
-                <table class="table-responsive table table-bordered">
-                    <thead>
-                        <th>No</th>
-                        <th>foto</th>
-                        <th>Nama</th>
-                        <th>harga</th>
-                        <th>stok</th>
-                        <th>deskripsi</th>
-                        <th>keterangan</th>
-                        <th>status</th>
-                        <th>Action</th>
-                    </thead>
-                    <tbody>
-                        @foreach($produk as $item)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td><img src="/produk-image/{{$item->image}}" alt="" width="40px" height="40px"></td>
-                            <td>{{$item->nama}}</td>
-                            <td>{{$item->harga}}</td>
-                            <td>{{$item->stok}}</td>
-                            <td>{{$item->deskripsi}}</td>
-                            <td>{{$item->keterangan}}</td>
-                            <td>{{$item->status}}</td>
-                            <td>
-                                <a href="{{ url('admin/produk/'.$item->id.'/edit') }}"class="btn btn-success">Edit</a>
-                                <a href="#" wire:click="deleteProduk({{$item->id}})"data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <div class="modal-body">
+         apakah anda ingin yakin menghapus {{$mdl->nama}}?
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <form action="produks/delete/{{$mdl->id}}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-warning">Delete</button>
+            </form>
+        </div>
+      </div>
     </div>
 </div>
-
+@endforeach
+<div class="col-md-12">
+    <div class="card p-4">
+        <h2 class="fw-bold">PRODUK 
+        <a href="{{url ('admin/produks/create') }}" class="btn btn-warning float-end rounded-pill">Tambah Produk</a>           
+        </h2>     
+        <table class="table-responsive table table-striped table-bordered mt-3 table-warning text-center">
+            <thead class="table-dark">
+                <th width="4%">No</th>
+                <th>Foto</th>
+                <th>Nama</th>
+                <th>kategori</th>
+                <th>Harga</th>
+                <th>Stok</th>
+                <th>keterangan</th>
+                <th width="17%">Action</th>
+            </thead>
+            <tbody>
+                @foreach($produk as $item)
+                <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td><img src="/produk-image/{{$item->image}}" alt="" width="40px" height="40px"></td>
+                    <td>{{$item->nama}}</td>
+                    <td>{{$item->category->nama}}</td>
+                    <td>{{$item->harga}}</td>
+                    <td>{{$item->stok}}</td>
+                    <td>{{$item->keterangan}}</td>
+                    <td class="">
+                        <a href="{{ url('admin/produks/edit/' .$item->id ) }}" class="btn btn-info rounded-pill p-2 px-3">Edit</a>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#deletemodal{{$item->id}}" class="btn btn-danger rounded-pill p-2 px-3">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 @endsection

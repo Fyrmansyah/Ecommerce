@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->mediumText('deskripsi');
             $table->mediumText('keterangan');
-            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('category')->onUpdate('cascade')->onDelete('cascade');
             $table->tinyInteger('status')->default('0')->comment('0=tampilkan,1=hidden');
             $table->timestamps();
         });
